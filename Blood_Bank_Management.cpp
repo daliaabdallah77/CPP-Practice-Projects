@@ -22,6 +22,7 @@ class hospital
          char ch;
          cout<< "Has a payment been made?(Y/N): ";
          cin>>ch;
+         
          if (ch == 'Y')
          {
            cout<<"Transaction Complete!";
@@ -50,6 +51,11 @@ class donor
             cin>>contact;
             cout<<"\n Enter fitness state (1-fit, 0-unfit): ";
             cin>>fitness;
+            if (cin.fail()) {
+            cin.clear(); // Resets the broken input stream
+            cin.ignore(10000, '\n'); // Flushes the garbage out of the system
+            fitness = 0; // Forces them to be unfit if they type invalid characters
+            }
             while (1)
             {
                 cout<<"\n Enter Blood Type: ";
@@ -91,7 +97,7 @@ class donor
             {
             case 1:
                 cout << "\n Enter new fitness state: ";
-                cin>>fitness;
+                cin >> fitness;
                 break;
             case 2:
                 cout << "\n Enter new contact number: ";
@@ -326,7 +332,7 @@ void donate(){
    int a,i;
    cout<<"Enter DNR: ";
    cin >> a;
-   if (a>=1)
+   if (a>=l)
    {
     cout<<"Enter a valid DNR\n: ";
     return;
@@ -384,7 +390,7 @@ void donate(){
                     b[i].r_1 = d[a].r;
                     cout << "Enter expiry: ";
                     cin >> b[i].expiry;
-                    z++;
+                    c++;
                     break;    
             }   }
         }
@@ -397,7 +403,7 @@ void donate(){
                     b[i].r_1 = d[a].r;
                     cout << "Enter expiry: ";
                     cin>>b[1].expiry;
-                    x++;
+                    v++;
                     break;
                 }
                 
@@ -416,7 +422,7 @@ void donate(){
                     b[i].r_1 = d[a].r;
                     cout << "Enter expiry: ";
                     cin >> b[i].expiry;
-                    z++;
+                    w++;
                     break;    
             }   }
         }
@@ -429,7 +435,7 @@ void donate(){
                     b[i].r_1 = d[a].r;
                     cout << "Enter expiry: ";
                     cin>>b[1].expiry;
-                    x++;
+                    n++;
                     break;
                 }
                 
@@ -448,7 +454,7 @@ void donate(){
                     b[i].r_1 = d[a].r;
                     cout << "Enter expiry: ";
                     cin >> b[i].expiry;
-                    z++;
+                    m++;
                     break;    
             }   }
         }
@@ -461,7 +467,7 @@ void donate(){
                     b[i].r_1 = d[a].r;
                     cout << "Enter expiry: ";
                     cin>>b[1].expiry;
-                    x++;
+                    q++;
                     break;
                 }
                 
@@ -470,8 +476,7 @@ void donate(){
         }
         break;
     default: break;
-    }
-    cout<<b[i].expiry;   
+    } 
 }
 
 void show(){
@@ -530,6 +535,12 @@ int main(){
             cout << "\n Enter choice";
             cout << "\n 1)Add donor 2)Update donor 3)Add hospital 4)Donate 5)Request Blood 6)Display available bloodpackets: ";
             cin>>ch;
+            if (cin.fail()) {
+            cin.clear(); // Resets the broken stream state
+            cin.ignore(10000, '\n'); // Flushes the garbage characters out of the buffer
+            cout << "\n Please enter a valid number.";
+            continue; // Skips the switch statement and restarts the loop safely
+            }
             switch (ch)
             {
             case 1:
